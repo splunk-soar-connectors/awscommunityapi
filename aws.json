@@ -9,40 +9,40 @@
     "product_version_regex": ".*",
     "publisher": "Booz Allen Hamilton",
     "license": "Copyright Booz Allen Hamilton 2017",
-    "app_version": "1.0.0",
-    "utctime_updated": "2017-09-14T15:34:59.374318Z",
+    "app_version": "1.0.1",
+    "utctime_updated": "2017-11-30T22:44:27.000000Z",
     "package_name": "phantom_aws",
     "main_module": "aws_connector.py",
     "min_phantom_version": "3.0.247",
     "app_wizard_version": "1.0.0",
     "pip_dependencies": {
-       "wheel": [
-         {
-           "module": "boto3",
-           "input_file": "wheels/boto3-1.4.7-py2.py3-none-any.whl"
-         },
-         {
-           "module": "s3transfer",
-           "input_file": "wheels/s3transfer-0.1.11-py2.py3-none-any.whl"
-         },
-         {
-           "module": "botocore",
-           "input_file": "wheels/botocore-1.7.13-py2.py3-none-any.whl"
-         },
-         {
-           "module": "futures",
-           "input_file": "wheels/futures-3.1.1-py2-none-any.whl"
-         },
-         {
-           "module": "docutils",
-           "input_file": "wheels/docutils-0.14-py2-none-any.whl"
-         },
-         {
-           "module": "jmespath",
-           "input_file": "wheels/jmespath-0.9.3-py2.py3-none-any.whl"
-         }
-       ]
-     },
+        "wheel": [
+            {
+                "module": "boto3",
+                "input_file": "wheels/boto3-1.4.7-py2.py3-none-any.whl"
+            },
+            {
+                "module": "s3transfer",
+                "input_file": "wheels/s3transfer-0.1.11-py2.py3-none-any.whl"
+            },
+            {
+                "module": "botocore",
+                "input_file": "wheels/botocore-1.7.13-py2.py3-none-any.whl"
+            },
+            {
+                "module": "futures",
+                "input_file": "wheels/futures-3.1.1-py2-none-any.whl"
+            },
+            {
+                "module": "docutils",
+                "input_file": "wheels/docutils-0.14-py2-none-any.whl"
+            },
+            {
+                "module": "jmespath",
+                "input_file": "wheels/jmespath-0.9.3-py2.py3-none-any.whl"
+            }
+        ]
+    },
     "configuration": {
         "access_key": {
             "description": "AWS access key",
@@ -159,45 +159,45 @@
                     "primary": true,
                     "required": true
                 }
-          },
-          "output": [
-              {
-                  "data_path": "action_result.parameter.ip",
-                  "data_type": "string",
-                  "column_name": "ip",
-                  "column_order": 0
-              },
-              {
-                  "data_path": "action_result.status",
-                  "data_type": "string",
-                  "column_name": "status",
-                  "column_order": 1
-              },
-              {
-                  "data_path": "action_result.message",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "summary.total_objects",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "summary.total_objects_successful",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.summary",
-                  "data_type": "string"
-              }
-          ],
-          "render": {
-              "type": "table"
-          },
-          "versions": "EQ(*)"
+            },
+            "output": [
+                {
+                    "data_path": "action_result.parameter.ip",
+                    "data_type": "string",
+                    "column_name": "ip",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary",
+                    "data_type": "string"
+                }
+            ],
+            "render": {
+                "type": "table"
+            },
+            "versions": "EQ(*)"
         },
         {
             "action": "disable acct",
@@ -252,7 +252,7 @@
             "render": {
                 "type": "table"
             },
-            "versions":"EQ(*)"
+            "versions": "EQ(*)"
         },
         {
             "action": "enable acct",
@@ -303,7 +303,7 @@
             "render": {
                 "type": "table"
             },
-            "versions":"EQ(*)"
+            "versions": "EQ(*)"
         },
         {
             "action": "remove access",
@@ -354,7 +354,7 @@
             "render": {
                 "type": "table"
             },
-            "versions":"EQ(*)"
+            "versions": "EQ(*)"
         },
         {
             "action": "enable access",
@@ -586,290 +586,294 @@
             },
             "output": [
                 {
-                  "data_path": "action_result.data.*.Tags.*.Key",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Tags.*.Key",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.Tags.*.Value",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Tags.*.Value",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.State.Code",
-                  "data_type": "numeric"
+                    "data_path": "action_result.data.*.State.Code",
+                    "data_type": "numeric"
                 },
                 {
-                  "data_path": "action_result.data.*.State.Name",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.State.Name",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.VpcId",
-                  "data_type": "string",
-                  "column_name": "VPC Id",
-                  "column_order": 3
+                    "data_path": "action_result.data.*.VpcId",
+                    "data_type": "string",
+                    "column_name": "VPC Id",
+                    "column_order": 3
                 },
                 {
-                  "data_path": "action_result.data.*.ImageId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.ImageId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.KeyName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.KeyName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.SubnetId",
-                  "data_type": "string",
-                  "column_name": "Subnet Id",
-                  "column_order": 4
+                    "data_path": "action_result.data.*.SubnetId",
+                    "data_type": "string",
+                    "column_name": "Subnet Id",
+                    "column_order": 4
                 },
                 {
-                  "data_path": "action_result.data.*.Placement.Tenancy",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Placement.Tenancy",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.Placement.GroupName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Placement.GroupName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.Placement.AvailabilityZone",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Placement.AvailabilityZone",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.Hypervisor",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Hypervisor",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.InstanceId",
-                  "data_type": "string",
-                  "column_name": "Instance Id",
-                  "column_order": 2
+                    "data_path": "action_result.data.*.InstanceId",
+                    "data_type": "string",
+                    "column_name": "Instance Id",
+                    "column_order": 2
                 },
                 {
-                  "data_path": "action_result.data.*.LaunchTime",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.LaunchTime",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.Monitoring.State",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Monitoring.State",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.ClientToken",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.ClientToken",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.Architecture",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.Architecture",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.EbsOptimized",
-                  "data_type": "boolean"
+                    "data_path": "action_result.data.*.EbsOptimized",
+                    "data_type": "boolean"
                 },
                 {
-                  "data_path": "action_result.data.*.InstanceType",
-                  "data_type": "string",
-                  "column_name": "Instance Type",
-                  "column_order": 5
+                    "data_path": "action_result.data.*.InstanceType",
+                    "data_type": "string",
+                    "column_name": "Instance Type",
+                    "column_order": 5
                 },
                 {
-                  "data_path": "action_result.data.*.PublicDnsName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.PublicDnsName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.AmiLaunchIndex",
-                  "data_type": "numeric"
+                    "data_path": "action_result.data.*.AmiLaunchIndex",
+                    "data_type": "numeric"
                 },
                 {
-                  "data_path": "action_result.data.*.PrivateDnsName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.PrivateDnsName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.RootDeviceName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.RootDeviceName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.RootDeviceType",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.RootDeviceType",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.SecurityGroups.*.GroupId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.SecurityGroups.*.GroupId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.SecurityGroups.*.GroupName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.SecurityGroups.*.GroupName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.PublicIpAddress",
-                  "data_type": "string",
-                  "column_name": "Public Ip Address",
-                  "contains": [ "ip" ],
-                  "column_order": 0
+                    "data_path": "action_result.data.*.PublicIpAddress",
+                    "data_type": "string",
+                    "column_name": "Public Ip Address",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 0
                 },
                 {
-                  "data_path": "action_result.data.*.SourceDestCheck",
-                  "data_type": "boolean"
+                    "data_path": "action_result.data.*.SourceDestCheck",
+                    "data_type": "boolean"
                 },
                 {
-                  "data_path": "action_result.data.*.PrivateIpAddress",
-                  "data_type": "string",
-                  "column_name": "Private Ip Address",
-                  "contains": [ "ip" ],
-                  "column_order": 1
+                    "data_path": "action_result.data.*.PrivateIpAddress",
+                    "data_type": "string",
+                    "column_name": "Private Ip Address",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 1
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.VpcId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.VpcId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Status",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Status",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.OwnerId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.OwnerId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.SubnetId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.SubnetId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.Status",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.Status",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachTime",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachTime",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeviceIndex",
-                  "data_type": "numeric"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeviceIndex",
+                    "data_type": "numeric"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachmentId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachmentId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeleteOnTermination",
-                  "data_type": "boolean"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeleteOnTermination",
+                    "data_type": "boolean"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.MacAddress",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.MacAddress",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicIp",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicIp",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.IpOwnerId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.IpOwnerId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicDnsName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicDnsName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Description",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Description",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateDnsName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateDnsName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.SourceDestCheck",
-                  "data_type": "boolean"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.SourceDestCheck",
+                    "data_type": "boolean"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddress",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddress",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.NetworkInterfaceId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.NetworkInterfaceId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Primary",
-                  "data_type": "boolean"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Primary",
+                    "data_type": "boolean"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicIp",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicIp",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.IpOwnerId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.IpOwnerId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicDnsName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicDnsName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateDnsName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateDnsName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateIpAddress",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateIpAddress",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.IamInstanceProfile.Id",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.IamInstanceProfile.Id",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.IamInstanceProfile.Arn",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.IamInstanceProfile.Arn",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.VirtualizationType",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.VirtualizationType",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.Status",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.Status",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.VolumeId",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.VolumeId",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.AttachTime",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.AttachTime",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.DeleteOnTermination",
-                  "data_type": "boolean"
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.DeleteOnTermination",
+                    "data_type": "boolean"
                 },
                 {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.DeviceName",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.DeviceName",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.data.*.StateTransitionReason",
-                  "data_type": "string"
+                    "data_path": "action_result.data.*.StateTransitionReason",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.status",
-                  "data_type": "string"
+                    "data_path": "action_result.status",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "action_result.message",
-                  "data_type": "string"
+                    "data_path": "action_result.message",
+                    "data_type": "string"
                 },
                 {
-                  "data_path": "summary.total_objects",
-                  "data_type": "numeric"
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
                 },
                 {
-                  "data_path": "summary.total_objects_successful",
-                  "data_type": "numeric"
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
                 },
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
@@ -905,10 +909,10 @@
                 }
             ],
             "render": {
-              "width": 12,
-              "title": "AWS EC2 Instance Info",
-              "type": "table",
-              "height": 5
+                "width": 12,
+                "title": "AWS EC2 Instance Info",
+                "type": "table",
+                "height": 5
             },
             "versions": "EQ(*)"
         },
@@ -1162,7 +1166,9 @@
                     "data_path": "action_result.data.*.PrivateIpAddress",
                     "data_type": "string",
                     "column_name": "Private Ip Address",
-                    "contains": [ "ip" ],
+                    "contains": [
+                        "ip"
+                    ],
                     "column_order": 1
                 },
                 {
@@ -1347,7 +1353,7 @@
                 "height": 5
             },
             "versions": "EQ(*)"
-          },
+        },
         {
             "action": "start instance",
             "identifier": "start_instance",
@@ -1480,7 +1486,9 @@
                     "data_path": "action_result.data.*.PublicIpAddress",
                     "data_type": "string",
                     "column_name": "Public Ip Address",
-                    "contains": [ "ip" ],
+                    "contains": [
+                        "ip"
+                    ],
                     "column_order": 0
                 },
                 {
@@ -1491,7 +1499,9 @@
                     "data_path": "action_result.data.*.PrivateIpAddress",
                     "data_type": "string",
                     "column_name": "Private Ip Address",
-                    "contains": [ "ip" ],
+                    "contains": [
+                        "ip"
+                    ],
                     "column_order": 1
                 },
                 {
@@ -1831,7 +1841,9 @@
                     "data_path": "action_result.data.*.PublicIpAddress",
                     "data_type": "string",
                     "column_name": "Public Ip Address",
-                    "contains": [ "ip" ],
+                    "contains": [
+                        "ip"
+                    ],
                     "column_order": 0
                 },
                 {
@@ -1842,7 +1854,9 @@
                     "data_path": "action_result.data.*.PrivateIpAddress",
                     "data_type": "string",
                     "column_name": "Private Ip Address",
-                    "contains": [ "ip" ],
+                    "contains": [
+                        "ip"
+                    ],
                     "column_order": 1
                 },
                 {
@@ -2064,691 +2078,699 @@
                     "primary": true
                 }
             },
-          "output": [
-              {
-                  "data_path": "action_result.data.*.Tags.*.Key",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Tags.*.Value",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.State.Code",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data.*.State.Name",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.VpcId",
-                  "data_type": "string",
-                  "column_name": "VPC Id",
-                  "column_order": 3
-              },
-              {
-                  "data_path": "action_result.data.*.ImageId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.KeyName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.SubnetId",
-                  "data_type": "string",
-                  "column_name": "Subnet Id",
-                  "column_order": 4
-              },
-              {
-                  "data_path": "action_result.data.*.Placement.Tenancy",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Placement.GroupName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Placement.AvailabilityZone",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Hypervisor",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.InstanceId",
-                  "data_type": "string",
-                  "column_name": "Instance Id",
-                  "column_order": 2
-              },
-              {
-                  "data_path": "action_result.data.*.LaunchTime",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Monitoring.State",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.ClientToken",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Architecture",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.EbsOptimized",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.InstanceType",
-                  "data_type": "string",
-                  "column_name": "Instance Type",
-                  "column_order": 5
-              },
-              {
-                  "data_path": "action_result.data.*.PublicDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.AmiLaunchIndex",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data.*.PrivateDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.RootDeviceName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.RootDeviceType",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.SecurityGroups.*.GroupId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.SecurityGroups.*.GroupName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.PublicIpAddress",
-                  "data_type": "string",
-                  "column_name": "Public Ip Address",
-                  "contains": [ "ip" ],
-                  "column_order": 0
-              },
-              {
-                  "data_path": "action_result.data.*.SourceDestCheck",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.PrivateIpAddress",
-                  "data_type": "string",
-                  "column_name": "Private Ip Address",
-                  "contains": [ "ip" ],
-                  "column_order": 1
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.VpcId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.OwnerId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.SubnetId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.Status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachTime",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeviceIndex",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachmentId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeleteOnTermination",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.MacAddress",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicIp",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.IpOwnerId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Description",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.SourceDestCheck",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddress",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.NetworkInterfaceId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Primary",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicIp",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.IpOwnerId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateIpAddress",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.IamInstanceProfile.Id",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.IamInstanceProfile.Arn",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.VirtualizationType",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.Status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.VolumeId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.AttachTime",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.DeleteOnTermination",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.DeviceName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.StateTransitionReason",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.message",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.parameter.ip_instance_id",
-                  "data_type": "string",
-                  "column_name": "ip",
-                  "column_order": 0
-              },
-              {
-                  "data_path": "action_result.status",
-                  "data_type": "string",
-                  "column_name": "status",
-                  "column_order": 1
-              },
-              {
-                  "data_path": "action_result.message",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "summary.total_objects",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "summary.total_objects_successful",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.summary",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "summary.total_objects",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "summary.total_objects_successful",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.summary",
-                  "data_type": "string"
-              }
-          ],
-          "render": {
-              "width": 12,
-              "title": "AWS EC2 Instance Info",
-              "type": "table",
-              "height": 5
-          },
-          "versions": "EQ(*)"
-    },
-    {
-        "action": "quarantine instance",
-        "identifier": "quarantine_instance",
-        "description": "Quarantines AWS instance that has the given IP address",
-        "type": "contain",
-        "read_only": true,
-        "parameters": {
-            "ip_instance_id": {
-                "description": "IP address or Instance Id of instance to lookup",
-                "data_type": "string",
-                "required": true,
-                "primary": true
-            }
+            "output": [
+                {
+                    "data_path": "action_result.data.*.Tags.*.Key",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Tags.*.Value",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.State.Code",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.State.Name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.VpcId",
+                    "data_type": "string",
+                    "column_name": "VPC Id",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.data.*.ImageId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.KeyName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.SubnetId",
+                    "data_type": "string",
+                    "column_name": "Subnet Id",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.data.*.Placement.Tenancy",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Placement.GroupName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Placement.AvailabilityZone",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Hypervisor",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.InstanceId",
+                    "data_type": "string",
+                    "column_name": "Instance Id",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.data.*.LaunchTime",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Monitoring.State",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.ClientToken",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Architecture",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.EbsOptimized",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.InstanceType",
+                    "data_type": "string",
+                    "column_name": "Instance Type",
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.data.*.PublicDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.AmiLaunchIndex",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.PrivateDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.RootDeviceName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.RootDeviceType",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.SecurityGroups.*.GroupId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.SecurityGroups.*.GroupName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.PublicIpAddress",
+                    "data_type": "string",
+                    "column_name": "Public Ip Address",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.data.*.SourceDestCheck",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.PrivateIpAddress",
+                    "data_type": "string",
+                    "column_name": "Private Ip Address",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.VpcId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.OwnerId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.SubnetId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.Status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachTime",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeviceIndex",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachmentId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeleteOnTermination",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.MacAddress",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicIp",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.IpOwnerId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Description",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.SourceDestCheck",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddress",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.NetworkInterfaceId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Primary",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicIp",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.IpOwnerId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateIpAddress",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.IamInstanceProfile.Id",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.IamInstanceProfile.Arn",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.VirtualizationType",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.Status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.VolumeId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.AttachTime",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.DeleteOnTermination",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.DeviceName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.StateTransitionReason",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.ip_instance_id",
+                    "data_type": "string",
+                    "column_name": "ip",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary",
+                    "data_type": "string"
+                }
+            ],
+            "render": {
+                "width": 12,
+                "title": "AWS EC2 Instance Info",
+                "type": "table",
+                "height": 5
+            },
+            "versions": "EQ(*)"
         },
-          "output": [
-              {
-                  "data_path": "action_result.data.*.Tags.*.Key",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Tags.*.Value",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.State.Code",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data.*.State.Name",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.VpcId",
-                  "data_type": "string",
-                  "column_name": "VPC Id",
-                  "column_order": 3
-              },
-              {
-                  "data_path": "action_result.data.*.ImageId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.KeyName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.SubnetId",
-                  "data_type": "string",
-                  "column_name": "Subnet Id",
-                  "column_order": 4
-              },
-              {
-                  "data_path": "action_result.data.*.Placement.Tenancy",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Placement.GroupName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Placement.AvailabilityZone",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Hypervisor",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.InstanceId",
-                  "data_type": "string",
-                  "column_name": "Instance Id",
-                  "column_order": 2
-              },
-              {
-                  "data_path": "action_result.data.*.LaunchTime",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Monitoring.State",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.ClientToken",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.Architecture",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.EbsOptimized",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.InstanceType",
-                  "data_type": "string",
-                  "column_name": "Instance Type",
-                  "column_order": 5
-              },
-              {
-                  "data_path": "action_result.data.*.PublicDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.AmiLaunchIndex",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data.*.PrivateDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.RootDeviceName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.RootDeviceType",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.SecurityGroups.*.GroupId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.SecurityGroups.*.GroupName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.PublicIpAddress",
-                  "data_type": "string",
-                  "column_name": "Public Ip Address",
-                  "contains": [ "ip" ],
-                  "column_order": 0
-              },
-              {
-                  "data_path": "action_result.data.*.SourceDestCheck",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.PrivateIpAddress",
-                  "data_type": "string",
-                  "column_name": "Private Ip Address",
-                  "contains": [ "ip" ],
-                  "column_order": 1
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.VpcId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.OwnerId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.SubnetId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.Status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachTime",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeviceIndex",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachmentId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeleteOnTermination",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.MacAddress",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicIp",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.IpOwnerId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.Description",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.SourceDestCheck",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddress",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.NetworkInterfaceId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Primary",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicIp",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.IpOwnerId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateDnsName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateIpAddress",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.IamInstanceProfile.Id",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.IamInstanceProfile.Arn",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.VirtualizationType",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.Status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.VolumeId",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.AttachTime",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.DeleteOnTermination",
-                  "data_type": "boolean"
-              },
-              {
-                  "data_path": "action_result.data.*.BlockDeviceMappings.*.DeviceName",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.data.*.StateTransitionReason",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.status",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.message",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.parameter.ip_instance_id",
-                  "data_type": "string",
-                  "column_name": "ip",
-                  "column_order": 0
-              },
-              {
-                  "data_path": "action_result.status",
-                  "data_type": "string",
-                  "column_name": "status",
-                  "column_order": 1
-              },
-              {
-                  "data_path": "action_result.message",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "summary.total_objects",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "summary.total_objects_successful",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.summary",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "summary.total_objects",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "summary.total_objects_successful",
-                  "data_type": "numeric"
-              },
-              {
-                  "data_path": "action_result.data",
-                  "data_type": "string"
-              },
-              {
-                  "data_path": "action_result.summary",
-                  "data_type": "string"
-              }
-          ],
-          "render": {
-              "width": 12,
-              "title": "AWS EC2 Instance Info",
-              "type": "table",
-              "height": 5
-          },
-          "versions": "EQ(*)"
+        {
+            "action": "quarantine instance",
+            "identifier": "quarantine_instance",
+            "description": "Quarantines AWS instance that has the given IP address",
+            "type": "contain",
+            "read_only": true,
+            "parameters": {
+                "ip_instance_id": {
+                    "description": "IP address or Instance Id of instance to lookup",
+                    "data_type": "string",
+                    "required": true,
+                    "primary": true
+                }
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.Tags.*.Key",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Tags.*.Value",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.State.Code",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.State.Name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.VpcId",
+                    "data_type": "string",
+                    "column_name": "VPC Id",
+                    "column_order": 3
+                },
+                {
+                    "data_path": "action_result.data.*.ImageId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.KeyName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.SubnetId",
+                    "data_type": "string",
+                    "column_name": "Subnet Id",
+                    "column_order": 4
+                },
+                {
+                    "data_path": "action_result.data.*.Placement.Tenancy",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Placement.GroupName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Placement.AvailabilityZone",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Hypervisor",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.InstanceId",
+                    "data_type": "string",
+                    "column_name": "Instance Id",
+                    "column_order": 2
+                },
+                {
+                    "data_path": "action_result.data.*.LaunchTime",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Monitoring.State",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.ClientToken",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.Architecture",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.EbsOptimized",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.InstanceType",
+                    "data_type": "string",
+                    "column_name": "Instance Type",
+                    "column_order": 5
+                },
+                {
+                    "data_path": "action_result.data.*.PublicDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.AmiLaunchIndex",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.PrivateDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.RootDeviceName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.RootDeviceType",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.SecurityGroups.*.GroupId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.SecurityGroups.*.GroupName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.PublicIpAddress",
+                    "data_type": "string",
+                    "column_name": "Public Ip Address",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.data.*.SourceDestCheck",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.PrivateIpAddress",
+                    "data_type": "string",
+                    "column_name": "Private Ip Address",
+                    "contains": [
+                        "ip"
+                    ],
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.VpcId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Groups.*.GroupName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.OwnerId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.SubnetId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.Status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachTime",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeviceIndex",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.AttachmentId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Attachment.DeleteOnTermination",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.MacAddress",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicIp",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.IpOwnerId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Association.PublicDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.Description",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.SourceDestCheck",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddress",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.NetworkInterfaceId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Primary",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicIp",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.IpOwnerId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.Association.PublicDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateDnsName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.NetworkInterfaces.*.PrivateIpAddresses.*.PrivateIpAddress",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.IamInstanceProfile.Id",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.IamInstanceProfile.Arn",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.VirtualizationType",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.Status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.VolumeId",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.AttachTime",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.Ebs.DeleteOnTermination",
+                    "data_type": "boolean"
+                },
+                {
+                    "data_path": "action_result.data.*.BlockDeviceMappings.*.DeviceName",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.StateTransitionReason",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.ip_instance_id",
+                    "data_type": "string",
+                    "column_name": "ip",
+                    "column_order": 0
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string",
+                    "column_name": "status",
+                    "column_order": 1
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary",
+                    "data_type": "string"
+                }
+            ],
+            "render": {
+                "width": 12,
+                "title": "AWS EC2 Instance Info",
+                "type": "table",
+                "height": 5
+            },
+            "versions": "EQ(*)"
         },
         {
             "action": "asg detach instance",
@@ -2885,7 +2907,9 @@
                     "data_path": "action_result.data.*.PublicIpAddress",
                     "data_type": "string",
                     "column_name": "Public Ip Address",
-                    "contains": [ "ip" ],
+                    "contains": [
+                        "ip"
+                    ],
                     "column_order": 0
                 },
                 {
@@ -2896,7 +2920,9 @@
                     "data_path": "action_result.data.*.PrivateIpAddress",
                     "data_type": "string",
                     "column_name": "Private Ip Address",
-                    "contains": [ "ip" ],
+                    "contains": [
+                        "ip"
+                    ],
                     "column_order": 1
                 },
                 {
@@ -3115,15 +3141,14 @@
                 "lambda_invocation_type": {
                     "description": "Type of invocation",
                     "data_type": "string",
-                    "order": 1,
+                    "order": 0,
                     "primary": true,
                     "required": true,
                     "value_list": [
                         "RequestResponse",
                         "Event"
                     ],
-                    "default": "RequestResponse",
-                    "order": 0
+                    "default": "RequestResponse"
                 },
                 "lambda_payload": {
                     "description": "JSON payload to pass to the Lambda function",
@@ -3192,7 +3217,7 @@
             "render": {
                 "type": "table"
             },
-            "versions":"EQ(*)"
+            "versions": "EQ(*)"
         }
     ]
 }
