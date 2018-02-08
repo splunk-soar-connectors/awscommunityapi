@@ -3,13 +3,11 @@ import phantom.app as phantom
 from phantom.base_connector import BaseConnector
 from phantom.action_result import ActionResult
 
-import boto3
-import uuid
-
 from aws_consts import *
-import requests
+
+import uuid
 import json
-from bs4 import BeautifulSoup
+import boto3
 import datetime
 
 
@@ -55,11 +53,7 @@ class AwsConnector(BaseConnector):
         super(AwsConnector, self).__init__()
 
         self._state = None
-
-        # Variable to hold a base_url in case the app makes REST calls
-        # Do note that the app json defines the asset config, so please
-        # modify this as you deem fit.
-        self._base_url = None
+        self._client = None
 
     def _get_client(self, service='ec2'):
 
@@ -85,122 +79,36 @@ class AwsConnector(BaseConnector):
             secret_key = config.get(AWS_SECRET_KEY)
 
             # NOTE: Access key and secret key specified
-            return boto3.client(
+            self._client = boto3.client(
                 service,
                 aws_access_key_id=access_key,
                 aws_secret_access_key=secret_key,
                 region_name=region_name
             )
 
+            return
+
         # NOTE: Use instance profile by default
-        return boto3.client(
+        self._client = boto3.client(
             service,
             region_name=region_name
         )
 
-    def _process_empty_reponse(self, response, action_result):
+    def _assume_role(self, role, service='ec2'):
 
-        if response.status_code == 200:
-            return RetVal(phantom.APP_SUCCESS, {})
+        self.debug_print("Assuming role, {0}".format(role))
 
-        return RetVal(action_result.set_status(phantom.APP_ERROR, "Empty response and no information in the header"), None)
+        assumed_role = self._client.assume_role(RoleArn=role, RoleSessionName="AssumedRole")
 
-    def _process_html_response(self, response, action_result):
+        creds = assumed_role['Credentials']
 
-        # An html response, treat it like an error
-        status_code = response.status_code
-
-        try:
-            soup = BeautifulSoup(response.text, "html.parser")
-            error_text = soup.text
-            split_lines = error_text.split('\n')
-            split_lines = [x.strip() for x in split_lines if x.strip()]
-            error_text = '\n'.join(split_lines)
-        except:
-            error_text = "Cannot parse error details"
-
-        message = "Status Code: {0}. Data from server:\n{1}\n".format(status_code,
-                error_text)
-
-        message = message.replace('{', '{{').replace('}', '}}')
-
-        return RetVal(action_result.set_status(phantom.APP_ERROR, message), None)
-
-    def _process_json_response(self, r, action_result):
-
-        # Try a json parse
-        try:
-            resp_json = r.json()
-        except Exception as e:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Unable to parse JSON response. Error: {0}".format(str(e))), None)
-
-        # Please specify the status codes here
-        if 200 <= r.status_code < 399:
-            return RetVal(phantom.APP_SUCCESS, resp_json)
-
-        # You should process the error returned in the json
-        message = "Error from server. Status Code: {0} Data from server: {1}".format(
-                r.status_code, r.text.replace('{', '{{').replace('}', '}}'))
-
-        return RetVal(action_result.set_status(phantom.APP_ERROR, message), None)
-
-    def _process_response(self, r, action_result):
-
-        # store the r_text in debug data, it will get dumped in the logs if the action fails
-        if hasattr(action_result, 'add_debug_data'):
-            action_result.add_debug_data({'r_status_code': r.status_code})
-            action_result.add_debug_data({'r_text': r.text})
-            action_result.add_debug_data({'r_headers': r.headers})
-
-        # Process each 'Content-Type' of response separately
-
-        # Process a json response
-        if 'json' in r.headers.get('Content-Type', ''):
-            return self._process_json_response(r, action_result)
-
-        # Process an HTML resonse, Do this no matter what the api talks.
-        # There is a high chance of a PROXY in between phantom and the rest of
-        # world, in case of errors, PROXY's return HTML, this function parses
-        # the error and adds it to the action_result.
-        if 'html' in r.headers.get('Content-Type', ''):
-            return self._process_html_response(r, action_result)
-
-        # it's not content-type that is to be parsed, handle an empty response
-        if not r.text:
-            return self._process_empty_reponse(r, action_result)
-
-        # everything else is actually an error at this point
-        message = "Can't process response from server. Status Code: {0} Data from server: {1}".format(
-                r.status_code, r.text.replace('{', '{{').replace('}', '}}'))
-
-        return RetVal(action_result.set_status(phantom.APP_ERROR, message), None)
-
-    def _make_rest_call(self, endpoint, action_result, headers=None, params=None, data=None, method="get"):
-
-        config = self.get_config()
-
-        resp_json = None
-
-        try:
-            request_func = getattr(requests, method)
-        except AttributeError:
-            return RetVal(action_result.set_status(phantom.APP_ERROR, "Invalid method: {0}".format(method)), resp_json)
-
-        # Create a URL to connect to
-        url = self._base_url + endpoint
-
-        try:
-            r = request_func(
-                            url,
-                            auth=("REPLACE ME: Replace with auth credentials"),
-                            json=data,
-                            headers=headers,
-                            verify=config.get('verify_server_cert', False),
-                            params=params)
-        except Exception as e:
-            return RetVal(action_result.set_status( phantom.APP_ERROR, "Error Connecting to server. Details: {0}".format(str(e))), resp_json)
-
-        return self._process_response(r, action_result)
+        self._client = boto3.client(
+            service,
+            aws_access_key_id=creds['AccessKeyId'],
+            aws_secret_access_key=creds['SecretAccessKey'],
+            aws_session_token=creds['SessionToken'],
+            region_name=self.get_config().get(AWS_REGION)
+        )
 
     def _handle_test_connectivity(self, param):
 
@@ -208,9 +116,9 @@ class AwsConnector(BaseConnector):
 
         try:
             self.save_progress("Creating AWS client...")
-            client = self._get_client()
+            self._get_client()
             self.save_progress("Test Service Call...")
-            client.describe_regions()
+            self._client.describe_regions()
             self.save_progress("Successfully connected to AWS")
 
         except Exception as e:
@@ -227,6 +135,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client(service='autoscaling')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='autoscaling')
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -258,6 +172,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client(service='autoscaling')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='autoscaling')
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -291,6 +211,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
+
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
         try:
@@ -322,6 +248,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
+
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
         try:
@@ -352,6 +284,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
 
         image_id = param[EC2_IMAGE_ID]
         instance_type = param[EC2_INSTANCE_TYPE]
@@ -396,6 +334,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
+
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
         try:
@@ -428,6 +372,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -462,6 +412,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
+
         ip_address = param[IP_ADDRESS]
 
         try:
@@ -482,6 +438,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
 
         ip_address = param[IP_ADDRESS]
 
@@ -504,6 +466,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client(service='iam')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='iam')
+
         username = param[AWS_USERNAME]
 
         try:
@@ -524,6 +492,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client(service='iam')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='iam')
 
         username = param[AWS_USERNAME]
 
@@ -546,6 +520,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client(service='iam')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='iam')
+
         username = param[AWS_USERNAME]
 
         try:
@@ -566,6 +546,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client(service='iam')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='iam')
 
         username = param[AWS_USERNAME]
 
@@ -588,6 +574,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client(service='iam')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='iam')
+
         username = param[AWS_USERNAME]
 
         try:
@@ -609,6 +601,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client(service='iam')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='iam')
+
         username = param[AWS_USERNAME]
 
         try:
@@ -629,6 +627,12 @@ class AwsConnector(BaseConnector):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
+
+        if 'role' not in param:
+            self._get_client()
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'])
 
         sg_id = param[SECURITY_GROUP_ID]
         sg_item = param[SECURITY_GROUP_ITEM]
@@ -652,6 +656,12 @@ class AwsConnector(BaseConnector):
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
 
+        if 'role' not in param:
+            self._get_client(service='lambda')
+        else:
+            self._get_client(service='sts')
+            self._assume_role(param['role'], service='lambda')
+
         lambda_function_name = param[LAMBDA_FUNCTION_NAME]
         lambda_invocation_type = param[LAMBDA_INVOCATION_TYPE]
         lambda_payload = param.get(LAMBDA_PAYLOAD)
@@ -664,16 +674,16 @@ class AwsConnector(BaseConnector):
                     lambda_payload
                 )
 
+                serialized_invocation_response = invocation_response['Payload'].read()
+                action_result.add_data(
+                    json.loads(serialized_invocation_response)
+                )
+
             elif not lambda_payload:
                 invocation_response = self._invoke_lambda(
                     lambda_function_name,
                     lambda_invocation_type,
                 )
-
-            serialized_invocation_response = invocation_response['Payload'].read()
-            action_result.add_data(
-                json.loads(serialized_invocation_response)
-            )
 
         except Exception as e:
             action_result.set_status(phantom.APP_ERROR, AWS_ERR, e)
@@ -687,16 +697,14 @@ class AwsConnector(BaseConnector):
         return action_result.get_status()
 
     def _stop_instance(self, instance):
-        client = self._get_client()
-        client.stop_instances(
+        self._client.stop_instances(
             InstanceIds=[
                 instance["InstanceId"],
             ]
         )
 
     def _start_instance(self, instance):
-        client = self._get_client()
-        client.start_instances(
+        self._client.start_instances(
             InstanceIds=[
                 instance["InstanceId"],
             ]
@@ -715,8 +723,7 @@ class AwsConnector(BaseConnector):
         tags,
         wait_for_status_checks
     ):
-        client = self._get_client()
-        reservation = client.run_instances(
+        reservation = self._client.run_instances(
             ImageId=image_id,
             InstanceType=instance_type,
             KeyName=key_name,
@@ -743,7 +750,7 @@ class AwsConnector(BaseConnector):
         instance_id = reservation['Instances'][0]['InstanceId']
 
         if wait_for_status_checks:
-            instance_status_check_waiter = client.get_waiter('instance_status_ok')
+            instance_status_check_waiter = self._client.get_waiter('instance_status_ok')
 
             # NOTE: Poll until new instance passes status checks
             instance_status_check_waiter.wait(
@@ -753,7 +760,7 @@ class AwsConnector(BaseConnector):
             )
 
         # NOTE: Add sg's for external access
-        client.modify_instance_attribute(
+        self._client.modify_instance_attribute(
             InstanceId=instance_id,
             Groups=[security_group_ids]
         )
@@ -774,8 +781,7 @@ class AwsConnector(BaseConnector):
         return tags_list
 
     def _blacklist_ip(self, ip_address):
-        client = self._get_client()
-        nacls = client.describe_network_acls()
+        nacls = self._client.describe_network_acls()
 
         for nacl in nacls["NetworkAcls"]:
             min_rule_id = min(
@@ -783,7 +789,7 @@ class AwsConnector(BaseConnector):
             )
             if min_rule_id < 1:
                 raise Exception("Rule number is less than 1")
-            client.create_network_acl_entry(
+            self._client.create_network_acl_entry(
                 CidrBlock='{}/32'.format(ip_address),
                 Egress=False,
                 NetworkAclId=nacl["NetworkAclId"],
@@ -793,13 +799,12 @@ class AwsConnector(BaseConnector):
             )
 
     def _whitelist_ip(self, ip_address):
-        client = self._get_client()
-        nacls = client.describe_network_acls()
+        nacls = self._client.describe_network_acls()
 
         for nacl in nacls["NetworkAcls"]:
             for rule in nacl["Entries"]:
                 if rule["CidrBlock"] == '{}/32'.format(ip_address):
-                    client.delete_network_acl_entry(
+                    self._client.delete_network_acl_entry(
                         NetworkAclId=nacl["NetworkAclId"],
                         Egress=rule["Egress"],
                         RuleNumber=rule["RuleNumber"]
@@ -808,10 +813,9 @@ class AwsConnector(BaseConnector):
     def _quarantine_instance(self, instance):
         instance_id = instance["InstanceId"]
         vpc_id = instance["VpcId"]
-        client = self._get_client()
 
         # NOTE: Create a quarantine security with no ingress or egress rules
-        sg = client.create_security_group(
+        sg = self._client.create_security_group(
             GroupName='Quarantine-{}'.format(str(uuid.uuid4().fields[-1])[:6]),
             Description='Quarantine for {}'.format(instance_id),
             VpcId=vpc_id
@@ -819,7 +823,7 @@ class AwsConnector(BaseConnector):
         sg_id = sg["GroupId"]
 
         # NOTE: Remove the default egress group
-        client.revoke_security_group_egress(
+        self._client.revoke_security_group_egress(
             GroupId=sg_id,
             IpPermissions=[
                 {
@@ -836,15 +840,15 @@ class AwsConnector(BaseConnector):
         )
 
         # NOTE: Assign security group to instance
-        client.modify_instance_attribute(InstanceId=instance_id, Groups=[sg_id])
+        self._client.modify_instance_attribute(InstanceId=instance_id, Groups=[sg_id])
         self._add_tag(
-            client,
+            self._client,
             instance_id,
             "Quarantine",
             "true"
         )
         self._add_tag(
-            client,
+            self._client,
             sg_id,
             "Name",
             "Phantom Quarantine {}".format(instance_id)
@@ -852,15 +856,14 @@ class AwsConnector(BaseConnector):
 
     def _snapshot_instance(self, instance):
         instance_id = instance["InstanceId"]
-        client = self._get_client()
         blockmappings = instance["BlockDeviceMappings"]
         for device in blockmappings:
-            snapshot = client.create_snapshot(
+            snapshot = self._client.create_snapshot(
                 VolumeId=device["Ebs"]["VolumeId"],
                 Description="Created by Phantom for {}".format(instance_id)
             )
             self._add_tag(
-                client,
+                self._client,
                 snapshot["SnapshotId"],
                 "Name", "Phantom Snapshot {}".format(instance_id)
             )
@@ -888,7 +891,6 @@ class AwsConnector(BaseConnector):
             return self._get_instance_from_ip(ip_instance_id)
 
     def _get_instance_from_ip(self, ip_address):
-        client = self._get_client()
 
         public_ip_filter = [
             {
@@ -898,7 +900,7 @@ class AwsConnector(BaseConnector):
                 ]
             },
         ]
-        reservations = client.describe_instances(Filters=public_ip_filter)
+        reservations = self._client.describe_instances(Filters=public_ip_filter)
 
         if len(reservations['Reservations']) == 0:
             private_ip_filter = [
@@ -909,7 +911,7 @@ class AwsConnector(BaseConnector):
                     ]
                 },
             ]
-            reservations = client.describe_instances(Filters=private_ip_filter)
+            reservations = self._client.describe_instances(Filters=private_ip_filter)
 
         if len(reservations['Reservations']) == 1:
             instance = reservations['Reservations'][0]['Instances'][0]
@@ -919,7 +921,6 @@ class AwsConnector(BaseConnector):
         return instance
 
     def _get_instance_from_instance_id(self, instance_id):
-        client = self._get_client()
 
         instance_id_filter = [
             {
@@ -929,7 +930,7 @@ class AwsConnector(BaseConnector):
                 ]
             },
         ]
-        reservations = client.describe_instances(Filters=instance_id_filter)
+        reservations = self._client.describe_instances(Filters=instance_id_filter)
 
         if len(reservations['Reservations']) == 1:
             instance = reservations['Reservations'][0]['Instances'][0]
@@ -939,8 +940,7 @@ class AwsConnector(BaseConnector):
         return instance
 
     def _disable_account(self, username):
-        client = self._get_client('iam')
-        client.put_user_policy(
+        self._client.put_user_policy(
             UserName=username,
             PolicyName='PhantomBlockAllPolicy',
             PolicyDocument="{\"Version\":\"2012-10-17\", \"Statement\""
@@ -949,15 +949,13 @@ class AwsConnector(BaseConnector):
         )
 
     def _enable_account(self, username):
-        client = self._get_client('iam')
-        client.delete_user_policy(
+        self._client.delete_user_policy(
             UserName=username,
             PolicyName='PhantomBlockAllPolicy',
         )
 
     def _disable_ec2_access(self, username):
-        client = self._get_client('iam')
-        client.put_user_policy(
+        self._client.put_user_policy(
             UserName=username,
             PolicyName='PhantomBlockEc2Policy',
             PolicyDocument="{\"Version\":\"2012-10-17\", \"Statement\""
@@ -966,15 +964,13 @@ class AwsConnector(BaseConnector):
         )
 
     def _enable_ec2_access(self, username):
-        client = self._get_client('iam')
-        client.delete_user_policy(
+        self._client.delete_user_policy(
             UserName=username,
             PolicyName='PhantomBlockEc2Policy',
         )
 
     def _disable_sg_access(self, username):
-        client = self._get_client('iam')
-        client.put_user_policy(
+        self._client.put_user_policy(
             UserName=username,
             PolicyName='PhantomBlockSecurityGroupPolicy',
             PolicyDocument="{\"Version\":\"2012-10-17\", \"Statement\""
@@ -987,8 +983,7 @@ class AwsConnector(BaseConnector):
         )
 
     def _enable_sg_access(self, username):
-        client = self._get_client('iam')
-        client.delete_user_policy(
+        self._client.delete_user_policy(
             UserName=username,
             PolicyName='PhantomBlockSecurityGroupPolicy',
         )
@@ -997,8 +992,6 @@ class AwsConnector(BaseConnector):
 
         action_result.add_data("item")
         action_result.add_data(item)
-
-        client = self._get_client('ec2')
 
         remove_item = json.loads(item)
 
@@ -1016,13 +1009,13 @@ class AwsConnector(BaseConnector):
             ]
         }
 
-        client.revoke_security_group_ingress(
+        self._client.revoke_security_group_ingress(
             GroupId=sg_id,
             IpPermissions=[map_params]
         )
 
     def _add_tags(self, client, resource_id, tags_list):
-        client.create_tags(
+        self._client.create_tags(
             Resources=[
                 resource_id,
             ],
@@ -1030,7 +1023,7 @@ class AwsConnector(BaseConnector):
         )
 
     def _add_tag(self, client, resource_id, tag_key, tag_valueue):
-        client.create_tags(
+        self._client.create_tags(
             Resources=[
                 resource_id,
             ],
@@ -1043,8 +1036,7 @@ class AwsConnector(BaseConnector):
         )
 
     def _asg_detach_instance(self, instance, action_result):
-        client = self._get_client('autoscaling')
-        response = client.describe_auto_scaling_instances(
+        response = self._client.describe_auto_scaling_instances(
             InstanceIds=[
                 instance["InstanceId"],
             ],
@@ -1057,7 +1049,7 @@ class AwsConnector(BaseConnector):
             asg_name = instances[0]['AutoScalingGroupName']
 
         if asg_name is not None:
-            response = client.detach_instances(
+            response = self._client.detach_instances(
                 InstanceIds=[
                     instance["InstanceId"],
                 ],
@@ -1074,23 +1066,21 @@ class AwsConnector(BaseConnector):
         """
         invocation_type: 'RequestResponse' | 'Event'
         """
-        client = self._get_client('lambda')
 
         if payload:
-            lambda_invocation_response = client.invoke(
+            lambda_invocation_response = self._client.invoke(
                 FunctionName=lambda_function_name,
                 InvocationType=invocation_type,
                 Payload=payload,
             )
 
         elif not payload:
-            lambda_invocation_response = client.invoke(
+            lambda_invocation_response = self._client.invoke(
                 FunctionName=lambda_function_name,
                 InvocationType=invocation_type,
             )
 
-        if invocation_type == 'RequestResponse':
-            return lambda_invocation_response
+        return lambda_invocation_response
 
     def handle_action(self, param):
 
