@@ -105,6 +105,12 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -113,6 +119,10 @@
                     "data_type": "string",
                     "column_name": "ip",
                     "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.role",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.status",
@@ -158,6 +168,12 @@
                     "data_type": "string",
                     "primary": true,
                     "required": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -166,6 +182,10 @@
                     "data_type": "string",
                     "column_name": "ip",
                     "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.role",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.status",
@@ -207,15 +227,26 @@
             "read_only": true,
             "parameters": {
                 "user_name": {
-                    "description": "Account's user name",
+                    "description": "Account's user name to disable",
                     "data_type": "string",
                     "primary": true,
-                    "required": true
+                    "required": true,
+                    "order": 0
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.user_name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -266,11 +297,21 @@
                     "data_type": "string",
                     "primary": true,
                     "required": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.user_name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -317,11 +358,21 @@
                     "data_type": "string",
                     "primary": true,
                     "required": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.user_name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -368,11 +419,21 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.user_name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -419,11 +480,21 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.user_name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -470,11 +541,21 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.user_name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -527,6 +608,12 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -536,6 +623,10 @@
                 },
                 {
                     "data_path": "action_result.parameter.sg_item",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -582,6 +673,12 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -882,6 +979,10 @@
                     "column_order": 0
                 },
                 {
+                    "data_path": "action_result.parameter.role",
+                    "data_type": "string"
+                },
+                {
                     "data_path": "action_result.status",
                     "data_type": "string",
                     "column_name": "status",
@@ -997,6 +1098,12 @@
                     "order": 9,
                     "primary": false,
                     "required": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -1038,6 +1145,10 @@
                 },
                 {
                     "data_path": "action_result.parameter.eni_associate_public_ip",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -1367,6 +1478,12 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -1657,6 +1774,10 @@
                     "data_type": "string",
                     "column_name": "ip",
                     "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.role",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.status",
@@ -1722,6 +1843,12 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -2012,6 +2139,10 @@
                     "data_type": "string",
                     "column_name": "ip",
                     "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.role",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.status",
@@ -2076,6 +2207,12 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -2366,6 +2503,10 @@
                     "data_type": "string",
                     "column_name": "ip",
                     "column_order": 0
+                },
+                {
+                    "data_path": "action_result.parameter.role",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.status",
@@ -2430,6 +2571,12 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -2722,6 +2869,10 @@
                     "column_order": 0
                 },
                 {
+                    "data_path": "action_result.parameter.role",
+                    "data_type": "string"
+                },
+                {
                     "data_path": "action_result.status",
                     "data_type": "string",
                     "column_name": "status",
@@ -2784,11 +2935,21 @@
                     "data_type": "string",
                     "required": true,
                     "primary": true
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
@@ -3156,6 +3317,12 @@
                     "order": 2,
                     "primary": false,
                     "required": false
+                },
+                "role": {
+                    "description": "ARN of Role to run action as",
+                    "data_type": "string",
+                    "required": false,
+                    "order": 5
                 }
             },
             "output": [
@@ -3169,6 +3336,10 @@
                 },
                 {
                     "data_path": "action_result.parameter.lambda_invocation_type",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.role",
                     "data_type": "string"
                 },
                 {
