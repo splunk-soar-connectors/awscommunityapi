@@ -1,6 +1,6 @@
 {
     "appid": "cbf7052e-1566-4bb0-8486-28965cff1f5b",
-    "name": "AWS",
+    "name": "AWS Community App",
     "description": "A Phantom integration that facilitates interaction with the AWS API",
     "type": "devops",
     "product_vendor": "Amazon Web Services",
@@ -9,12 +9,12 @@
     "product_name": "AWS",
     "product_version_regex": ".*",
     "publisher": "Booz Allen Hamilton",
-    "license": "Copyright Booz Allen Hamilton 2017-2018",
+    "license": "Copyright Booz Allen Hamilton 2017-2019",
     "app_version": "1.0.3",
     "utctime_updated": "2018-06-07T15:57:55.000000Z",
     "package_name": "phantom_aws",
     "main_module": "aws_connector.py",
-    "min_phantom_version": "3.5.180",
+    "min_phantom_version": "4.0.1068",
     "app_wizard_version": "1.0.0",
     "pip_dependencies": {
         "wheel": [
