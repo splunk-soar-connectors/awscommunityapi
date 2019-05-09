@@ -99,7 +99,7 @@
             "description": "Blacklist IP by adding a rule to every subnet NACL accessible by credentials",
             "verbose": "Blacklist IP by adding a rule to every subnet NACL accessible by credentials",
             "type": "contain",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "ip": {
                     "description": "IP address to blacklist",
@@ -168,7 +168,7 @@
             "description": "Whitelist IP by removing any block rules from NACLs",
             "type": "correct",
             "identifier": "whitelist_ip",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "ip": {
                     "description": "IP address to whitelist",
@@ -237,7 +237,7 @@
             "description": "Disables an AWS IAM user account",
             "type": "contain",
             "identifier": "disable_user_acct",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name to disable",
@@ -303,7 +303,7 @@
             "description": "Enables an AWS IAM user account",
             "type": "correct",
             "identifier": "enable_user_acct",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name",
@@ -364,7 +364,7 @@
             "description": "Removes EC2 Access for a given IAM user",
             "type": "contain",
             "identifier": "disable_ec2_access",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name",
@@ -425,7 +425,7 @@
             "description": "Enable EC2 Access for a given IAM user",
             "type": "correct",
             "identifier": "enable_ec2_access",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name",
@@ -486,7 +486,7 @@
             "identifier": "disable_sg_access",
             "description": "Removes Security Group Access for a given IAM user",
             "type": "contain",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name",
@@ -547,7 +547,7 @@
             "identifier": "enable_sg_access",
             "description": "Enable Security Group Access for a given IAM user",
             "type": "correct",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name",
@@ -608,7 +608,7 @@
             "identifier": "remove_sg_ingress",
             "description": "Removes ingress rule from security group",
             "type": "contain",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "sg_id": {
                     "description": "AWS Security Group Id",
@@ -685,7 +685,8 @@
                     "description": "IP address or Instance Id of instance to lookup",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "required": true,
                     "primary": true
@@ -712,7 +713,8 @@
                     "data_path": "action_result.parameter.ip_instance_id",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "column_name": "ip",
                     "column_order": 0
@@ -1042,7 +1044,7 @@
             "description": "Creates an AWS instance from an image id",
             "verbose": "This action allows you to create a new AWS instance. To tag the instance, pass a json string in the playbook with the tags. Refer to this example - tags: json.dumps({\"Name\": \"MyNewInstance\", \"DeployedByPhantom\": \"true\" })",
             "type": "generic",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "image_id": {
                     "description": "AMI id of instance to create",
@@ -1490,13 +1492,14 @@
             "description": "Start EC2 instance",
             "verbose": "Start an EC2 instance up",
             "type": "correct",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "ip_instance_id": {
                     "description": "IP address or Instance Id of instance to lookup",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "required": true,
                     "primary": true
@@ -1523,7 +1526,8 @@
                     "data_path": "action_result.parameter.ip_instance_id",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "column_name": "ip",
                     "column_order": 0
@@ -1860,14 +1864,15 @@
             "identifier": "stop_instance",
             "description": "Stop EC2 instance",
             "verbose": "Stop an EC2 instance",
-            "type": "correct",
-            "read_only": true,
+            "type": "contain",
+            "read_only": false,
             "parameters": {
                 "ip_instance_id": {
                     "description": "IP address or Instance Id of instance to lookup",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "required": true,
                     "primary": true
@@ -1894,7 +1899,8 @@
                     "data_path": "action_result.parameter.ip_instance_id",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "column_name": "ip",
                     "column_order": 0
@@ -2237,7 +2243,8 @@
                     "description": "IP address or Instance Id of instance to lookup",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "required": true,
                     "primary": true
@@ -2264,7 +2271,8 @@
                     "data_path": "action_result.parameter.ip_instance_id",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "column_name": "ip",
                     "column_order": 0
@@ -2601,13 +2609,14 @@
             "identifier": "quarantine_instance",
             "description": "Quarantines AWS instance that has the given IP address",
             "type": "contain",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "ip_instance_id": {
                     "description": "IP address or Instance Id of instance to lookup",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "required": true,
                     "primary": true
@@ -2634,7 +2643,8 @@
                     "data_path": "action_result.parameter.ip_instance_id",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "column_name": "ip",
                     "column_order": 0
@@ -2971,13 +2981,14 @@
             "identifier": "asg_detach_instance",
             "description": "Detaches an instance from an auto-scaling group",
             "type": "contain",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "ip_instance_id": {
                     "description": "IP address or Instance Id of instance to lookup",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ],
                     "required": true,
                     "primary": true
@@ -3004,7 +3015,8 @@
                     "data_path": "action_result.parameter.ip_instance_id",
                     "data_type": "string",
                     "contains": [
-                        "aws bah instance id"
+                        "aws bah instance id",
+                        "ip"
                     ]
                 },
                 {
@@ -3339,7 +3351,7 @@
             "description": "Invoke an AWS Lambda function",
             "type": "generic",
             "identifier": "invoke_lambda_function",
-            "read_only": true,
+            "read_only": false,
             "parameters": {
                 "lambda_function_name": {
                     "description": "Name of the Lambda function to invoke",
