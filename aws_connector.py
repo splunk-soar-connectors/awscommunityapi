@@ -69,7 +69,6 @@ class AwsConnector(BaseConnector):
             aws_creds = [
                 cred for cred in (config.get(aws_cred) for aws_cred in aws_cred_config_vars) if cred is not None
             ]
-            print(len(aws_creds))
             return len(aws_creds) == 2
 
         config = self.get_config()

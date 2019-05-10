@@ -113,6 +113,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -121,8 +124,8 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip",
@@ -130,12 +133,17 @@
                     "contains": [
                         "ip"
                     ],
-                    "column_name": "ip",
+                    "column_name": "IP",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -182,6 +190,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -190,8 +201,8 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip",
@@ -199,12 +210,17 @@
                     "contains": [
                         "ip"
                     ],
-                    "column_name": "ip",
+                    "column_name": "IP",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -242,6 +258,9 @@
                 "user_name": {
                     "description": "Account's user name to disable",
                     "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
                     "primary": true,
                     "required": true,
                     "order": 0
@@ -249,6 +268,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -257,16 +279,26 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.user_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
+                    "column_name": "Username",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.data",
@@ -308,12 +340,18 @@
                 "user_name": {
                     "description": "Account's user name",
                     "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
                     "primary": true,
                     "required": true
                 },
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -322,16 +360,26 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.user_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
+                    "column_name": "Username",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.data",
@@ -364,17 +412,24 @@
             "description": "Removes EC2 Access for a given IAM user",
             "type": "contain",
             "identifier": "disable_ec2_access",
+            "undo": "enable_ec2_access",
             "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name",
                     "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
                     "primary": true,
                     "required": true
                 },
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -383,16 +438,26 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.user_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
+                    "column_name": "Username",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.data",
@@ -425,17 +490,24 @@
             "description": "Enable EC2 Access for a given IAM user",
             "type": "correct",
             "identifier": "enable_ec2_access",
+            "undo": "disable_ec2_access",
             "read_only": false,
             "parameters": {
                 "user_name": {
                     "description": "Account's user name",
                     "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
                     "required": true,
                     "primary": true
                 },
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -444,16 +516,26 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.user_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
+                    "column_name": "Username",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.data",
@@ -491,12 +573,18 @@
                 "user_name": {
                     "description": "Account's user name",
                     "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
                     "required": true,
                     "primary": true
                 },
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -505,16 +593,26 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.user_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
+                    "column_name": "Username",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.data",
@@ -552,12 +650,18 @@
                 "user_name": {
                     "description": "Account's user name",
                     "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
                     "required": true,
                     "primary": true
                 },
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -566,16 +670,26 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.user_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "user name"
+                    ],
+                    "column_name": "Username",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.data",
@@ -625,6 +739,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -633,12 +750,17 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
+                    "column_name": "Status",
                     "column_order": 1
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.sg_id",
@@ -694,6 +816,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -701,13 +826,9 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
@@ -716,12 +837,17 @@
                         "aws bah instance id",
                         "ip"
                     ],
-                    "column_name": "ip",
+                    "column_name": "IP | Instance ID",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -1123,6 +1249,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -1130,12 +1259,8 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
+                    "column_name": "Status",
                     "column_order": 1
                 },
                 {
@@ -1160,7 +1285,12 @@
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.security_group_ids",
@@ -1507,6 +1637,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -1514,13 +1647,9 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
@@ -1529,12 +1658,17 @@
                         "aws bah instance id",
                         "ip"
                     ],
-                    "column_name": "ip",
+                    "column_name": "IP | Instance ID",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -1880,6 +2014,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -1887,13 +2024,9 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
@@ -1902,12 +2035,17 @@
                         "aws bah instance id",
                         "ip"
                     ],
-                    "column_name": "ip",
+                    "column_name": "IP | Instance ID",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -2252,6 +2390,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -2259,13 +2400,9 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
@@ -2274,12 +2411,17 @@
                         "aws bah instance id",
                         "ip"
                     ],
-                    "column_name": "ip",
+                    "column_name": "IP | Instance ID",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -2624,6 +2766,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -2631,13 +2776,9 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
@@ -2646,12 +2787,17 @@
                         "aws bah instance id",
                         "ip"
                     ],
-                    "column_name": "ip",
+                    "column_name": "IP | Instance ID",
                     "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -2996,6 +3142,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -3003,13 +3152,9 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
-                    "column_order": 1
+                    "column_name": "Status",
+                    "column_order": 2
                 },
                 {
                     "data_path": "action_result.parameter.ip_instance_id",
@@ -3017,11 +3162,18 @@
                     "contains": [
                         "aws bah instance id",
                         "ip"
-                    ]
+                    ],
+                    "column_name": "IP | Instance ID",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 1
                 },
                 {
                     "data_path": "action_result.data",
@@ -3382,6 +3534,9 @@
                 "role": {
                     "description": "ARN of Role to run action as",
                     "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
                     "required": false,
                     "order": 5
                 }
@@ -3390,7 +3545,7 @@
                 {
                     "data_path": "action_result.status",
                     "data_type": "string",
-                    "column_name": "status",
+                    "column_name": "Status",
                     "column_order": 1
                 },
                 {
@@ -3407,7 +3562,12 @@
                 },
                 {
                     "data_path": "action_result.parameter.role",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "contains": [
+                        "aws bah role arn"
+                    ],
+                    "column_name": "Role ARN",
+                    "column_order": 0
                 },
                 {
                     "data_path": "action_result.data",
