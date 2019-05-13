@@ -58,6 +58,7 @@ class AwsConnector(BaseConnector):
     def _get_client(self, service='ec2'):
 
         def aws_credentials_exist(config):
+
             """
             Both the access key and secret key must exist
             to build the client. We recommend configuring a role
@@ -68,7 +69,6 @@ class AwsConnector(BaseConnector):
             aws_creds = [
                 cred for cred in (config.get(aws_cred) for aws_cred in aws_cred_config_vars) if cred is not None
             ]
-
             return len(aws_creds) == 2
 
         config = self.get_config()
@@ -94,11 +94,13 @@ class AwsConnector(BaseConnector):
             region_name=region_name
         )
 
-    def _assume_role(self, role, service='ec2'):
+    def _assume_role(self, role, action_result, service='ec2'):
 
         self.debug_print("Assuming role, {0}".format(role))
-
-        assumed_role = self._client.assume_role(RoleArn=role, RoleSessionName="AssumedRole")
+        try:
+            assumed_role = self._client.assume_role(RoleArn=role, RoleSessionName="AssumedRole")
+        except Exception as e:
+            return action_result.set_status(phantom.APP_ERROR, 'Error occured while processing the given role: {0}. Error: {1}'.format(role, str(e)))
 
         creds = assumed_role['Credentials']
 
@@ -109,6 +111,7 @@ class AwsConnector(BaseConnector):
             aws_session_token=creds['SessionToken'],
             region_name=self.get_config().get(AWS_REGION)
         )
+        return action_result.set_status(phantom.APP_SUCCESS)
 
     def _handle_test_connectivity(self, param):
 
@@ -140,7 +143,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='autoscaling')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='autoscaling')
+            resp = self._assume_role(param['role'], action_result, service='autoscaling')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -177,7 +182,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='autoscaling')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='autoscaling')
+            resp = self._assume_role(param['role'], action_result, service='autoscaling')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -215,7 +222,9 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -252,7 +261,9 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -289,7 +300,9 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         image_id = param[EC2_IMAGE_ID]
         instance_type = param[EC2_INSTANCE_TYPE]
@@ -338,7 +351,9 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -377,7 +392,9 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_instance_id = param[EC2_IP_INSTANCE_ID]
 
@@ -416,7 +433,9 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_address = param[IP_ADDRESS]
 
@@ -443,7 +462,9 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         ip_address = param[IP_ADDRESS]
 
@@ -470,7 +491,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='iam')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='iam')
+            resp = self._assume_role(param['role'], action_result, service='iam')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         username = param[AWS_USERNAME]
 
@@ -497,7 +520,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='iam')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='iam')
+            resp = self._assume_role(param['role'], action_result, service='iam')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         username = param[AWS_USERNAME]
 
@@ -524,7 +549,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='iam')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='iam')
+            resp = self._assume_role(param['role'], action_result, service='iam')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         username = param[AWS_USERNAME]
 
@@ -551,7 +578,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='iam')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='iam')
+            resp = self._assume_role(param['role'], action_result, service='iam')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         username = param[AWS_USERNAME]
 
@@ -578,7 +607,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='iam')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='iam')
+            resp = self._assume_role(param['role'], action_result, service='iam')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         username = param[AWS_USERNAME]
 
@@ -605,7 +636,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='iam')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='iam')
+            resp = self._assume_role(param['role'], action_result, service='iam')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         username = param[AWS_USERNAME]
 
@@ -632,13 +665,17 @@ class AwsConnector(BaseConnector):
             self._get_client()
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'])
+            resp = self._assume_role(param['role'], action_result)
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         sg_id = param[SECURITY_GROUP_ID]
         sg_item = param[SECURITY_GROUP_ITEM]
 
         try:
-            self._remove_sg_ingress(sg_id, sg_item, action_result)
+            response = self._remove_sg_ingress(sg_id, sg_item, action_result)
+            if phantom.is_fail(response):
+                return action_result.get_status()
 
         except Exception as e:
             action_result.set_status(phantom.APP_ERROR, AWS_ERR, e)
@@ -660,7 +697,9 @@ class AwsConnector(BaseConnector):
             self._get_client(service='lambda')
         else:
             self._get_client(service='sts')
-            self._assume_role(param['role'], service='lambda')
+            resp = self._assume_role(param['role'], action_result, service='lambda')
+            if phantom.is_fail(resp):
+                return action_result.get_status()
 
         lambda_function_name = param[LAMBDA_FUNCTION_NAME]
         lambda_invocation_type = param[LAMBDA_INVOCATION_TYPE]
@@ -994,6 +1033,8 @@ class AwsConnector(BaseConnector):
         action_result.add_data(item)
 
         remove_item = json.loads(item)
+        if not isinstance(remove_item, dict):
+            return action_result.set_status(phantom.APP_ERROR, 'Please provide the item in JSON format')
 
         # NOTE: Need to map parameters because of first letter
         # casing is different (lower case in event,
@@ -1013,6 +1054,7 @@ class AwsConnector(BaseConnector):
             GroupId=sg_id,
             IpPermissions=[map_params]
         )
+        return action_result.set_status(phantom.APP_SUCCESS)
 
     def _add_tags(self, client, resource_id, tags_list):
         self._client.create_tags(
