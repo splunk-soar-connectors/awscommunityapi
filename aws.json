@@ -102,15 +102,14 @@
             "versions": "EQ(*)"
         },
         {
-            "action": "blacklist ip",
-            "identifier": "blacklist_ip",
-            "description": "Blacklist IP by adding a rule to every subnet NACL accessible by credentials",
-            "verbose": "Blacklist IP by adding a rule to every subnet NACL accessible by credentials",
+            "action": "block ip",
+            "identifier": "block_ip",
+            "description": "Block IP by adding a rule to every subnet NACL accessible by credentials",
             "type": "contain",
             "read_only": false,
             "parameters": {
                 "ip": {
-                    "description": "IP address to blacklist",
+                    "description": "IP address to block",
                     "data_type": "string",
                     "contains": [
                         "ip"
@@ -180,14 +179,14 @@
             "versions": "EQ(*)"
         },
         {
-            "action": "whitelist ip",
-            "description": "Whitelist IP by removing any block rules from NACLs",
+            "action": "unblock ip",
+            "description": "Unblock IP by removing any block rules from NACLs",
             "type": "correct",
-            "identifier": "whitelist_ip",
+            "identifier": "unblock_ip",
             "read_only": false,
             "parameters": {
                 "ip": {
-                    "description": "IP address to whitelist",
+                    "description": "IP address to Unblock",
                     "data_type": "string",
                     "contains": [
                         "ip"

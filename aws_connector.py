@@ -1,14 +1,14 @@
 # Phantom App imports
+import datetime
+import json
+import uuid
+
+import boto3
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
 from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
 
 from aws_consts import *
-
-import uuid
-import json
-import boto3
-import datetime
 
 
 class RetVal(tuple):
@@ -31,8 +31,8 @@ class AwsConnector(BaseConnector):
     ACTION_ID_CREATE_INSTANCE = "create_instance"
     ACTION_ID_QUARANTINE = "quarantine_instance"
     ACTION_ID_SNAPSHOT = "snapshot_instance"
-    ACTION_ID_BLACKLIST = "blacklist_ip"
-    ACTION_ID_WHITELIST = "whitelist_ip"
+    ACTION_ID_BLOCK = "block_ip"
+    ACTION_ID_UNBLOCK = "unblock_ip"
     ACTION_ID_DISABLE_EC2 = "disable_ec2_access"
     ACTION_ID_ENABLE_EC2 = "enable_ec2_access"
     ACTION_ID_DISABLE_SG_ACCESS = "disable_sg_access"
@@ -100,7 +100,8 @@ class AwsConnector(BaseConnector):
         try:
             assumed_role = self._client.assume_role(RoleArn=role, RoleSessionName="AssumedRole")
         except Exception as e:
-            return action_result.set_status(phantom.APP_ERROR, 'Error occured while processing the given role: {0}. Error: {1}'.format(role, str(e)))
+            return action_result.set_status(
+                phantom.APP_ERROR, 'Error occured while processing the given role: {0}. Error: {1}'.format(role, str(e)))
 
         creds = assumed_role['Credentials']
 
@@ -424,7 +425,7 @@ class AwsConnector(BaseConnector):
 
         return action_result.get_status()
 
-    def _handle_blacklist_ip(self, param):
+    def _handle_block_ip(self, param):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
@@ -440,7 +441,7 @@ class AwsConnector(BaseConnector):
         ip_address = param[IP_ADDRESS]
 
         try:
-            self._blacklist_ip(ip_address)
+            self._block_ip(ip_address)
 
         except Exception as e:
             action_result.set_status(phantom.APP_ERROR, AWS_ERR, e)
@@ -448,12 +449,12 @@ class AwsConnector(BaseConnector):
 
         action_result.set_status(
             phantom.APP_SUCCESS,
-            "Successfully Blacklisted: {}".format(ip_address)
+            "Successfully Blocked: {}".format(ip_address)
         )
 
         return action_result.get_status()
 
-    def _handle_whitelist_ip(self, param):
+    def _handle_unblock_ip(self, param):
 
         action_result = ActionResult(dict(param))
         self.add_action_result(action_result)
@@ -469,7 +470,7 @@ class AwsConnector(BaseConnector):
         ip_address = param[IP_ADDRESS]
 
         try:
-            self._whitelist_ip(ip_address)
+            self._unblock_ip(ip_address)
 
         except Exception as e:
             action_result.set_status(phantom.APP_ERROR, AWS_ERR, e)
@@ -477,7 +478,7 @@ class AwsConnector(BaseConnector):
 
         action_result.set_status(
             phantom.APP_SUCCESS,
-            "Successfully Whitelisted: {}".format(ip_address)
+            "Successfully Unblocked: {}".format(ip_address)
         )
 
         return action_result.get_status()
@@ -819,7 +820,7 @@ class AwsConnector(BaseConnector):
 
         return tags_list
 
-    def _blacklist_ip(self, ip_address):
+    def _block_ip(self, ip_address):
         nacls = self._client.describe_network_acls()
 
         for nacl in nacls["NetworkAcls"]:
@@ -837,7 +838,7 @@ class AwsConnector(BaseConnector):
                 RuleNumber=min_rule_id - 1,
             )
 
-    def _whitelist_ip(self, ip_address):
+    def _unblock_ip(self, ip_address):
         nacls = self._client.describe_network_acls()
 
         for nacl in nacls["NetworkAcls"]:
@@ -1153,11 +1154,11 @@ class AwsConnector(BaseConnector):
         elif action_id == self.ACTION_ID_SNAPSHOT:
             ret_val = self._handle_snapshot(param)
 
-        elif action_id == self.ACTION_ID_BLACKLIST:
-            ret_val = self._handle_blacklist_ip(param)
+        elif action_id == self.ACTION_ID_BLOCK:
+            ret_val = self._handle_block_ip(param)
 
-        elif action_id == self.ACTION_ID_WHITELIST:
-            ret_val = self._handle_whitelist_ip(param)
+        elif action_id == self.ACTION_ID_UNBLOCK:
+            ret_val = self._handle_unblock_ip(param)
 
         elif action_id == self.ACTION_ID_DISABLE_ACCT:
             ret_val = self._handle_disable_acct(param)
@@ -1219,11 +1220,12 @@ class AwsConnector(BaseConnector):
 if __name__ == '__main__':
 
     import sys
+
     import pudb
     pudb.set_trace()
 
     if (len(sys.argv) < 2):
-        print "No test json specified as input"
+        print("No test json specified as input")
         exit(0)
 
     with open(sys.argv[1]) as f:
@@ -1234,6 +1236,6 @@ if __name__ == '__main__':
         connector = AwsConnector()
         connector.print_progress_message = True
         ret_val = connector._handle_action(json.dumps(in_json), None)
-        print (json.dumps(json.loads(ret_val), indent=4))
+        print(json.dumps(json.loads(ret_val), indent=4))
 
     exit(0)
