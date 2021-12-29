@@ -186,7 +186,7 @@
             "read_only": false,
             "parameters": {
                 "ip": {
-                    "description": "IP address to Unblock",
+                    "description": "IP address to unblock",
                     "data_type": "string",
                     "contains": [
                         "ip"
