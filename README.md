@@ -2,30 +2,13 @@
 # AWS Community App
 
 Publisher: Booz Allen Hamilton  
-Connector Version: 1\.0\.4  
+Connector Version: 1\.0\.5  
 Product Vendor: Amazon Web Services  
 Product Name: AWS  
 Product Version Supported (regex): "\.\*"  
 Minimum Product Version: 4\.0\.1068  
 
 A Phantom integration that facilitates interaction with the AWS API
-
-# AWS Phantom App
-
-A Phantom app that facilitates interaction with the AWS API.
-
-### Install dependencies (as root)
-    phenv pip2.7 install boto3
-
-### Installing from command line (as phantom user)
-    su phantom
-    phenv python2.7 /opt/phantom/bin/compile_app.pyc -i
-
-### Currently supported AWS Services
-- EC2
-- IAM
-- Lambda
-
 
 ### Configuration Variables
 The below configuration variables are required for this Connector to operate.  These variables are specified when configuring a AWS asset in SOAR.
@@ -38,8 +21,8 @@ VARIABLE | REQUIRED | TYPE | DESCRIPTION
 
 ### Supported Actions  
 [test connectivity](#action-test-connectivity) - Validate the asset configuration for connectivity using supplied configuration  
-[blacklist ip](#action-blacklist-ip) - Blacklist IP by adding a rule to every subnet NACL accessible by credentials  
-[whitelist ip](#action-whitelist-ip) - Whitelist IP by removing any block rules from NACLs  
+[block ip](#action-block-ip) - Block IP by adding a rule to every subnet NACL accessible by credentials  
+[unblock ip](#action-unblock-ip) - Unblock IP by removing any block rules from NACLs  
 [disable acct](#action-disable-acct) - Disables an AWS IAM user account  
 [enable acct](#action-enable-acct) - Enables an AWS IAM user account  
 [remove access](#action-remove-access) - Removes EC2 Access for a given IAM user  
@@ -68,18 +51,16 @@ No parameters are required for this action
 #### Action Output
 No Output  
 
-## action: 'blacklist ip'
-Blacklist IP by adding a rule to every subnet NACL accessible by credentials
+## action: 'block ip'
+Block IP by adding a rule to every subnet NACL accessible by credentials
 
 Type: **contain**  
 Read only: **False**
 
-Blacklist IP by adding a rule to every subnet NACL accessible by credentials
-
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**ip** |  required  | IP address to blacklist | string |  `ip` 
+**ip** |  required  | IP address to block | string |  `ip` 
 **role** |  optional  | ARN of Role to run action as | string |  `aws bah role arn` 
 
 #### Action Output
@@ -94,8 +75,8 @@ action\_result\.message | string |
 summary\.total\_objects | numeric | 
 summary\.total\_objects\_successful | numeric |   
 
-## action: 'whitelist ip'
-Whitelist IP by removing any block rules from NACLs
+## action: 'unblock ip'
+Unblock IP by removing any block rules from NACLs
 
 Type: **correct**  
 Read only: **False**
@@ -103,7 +84,7 @@ Read only: **False**
 #### Action Parameters
 PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 --------- | -------- | ----------- | ---- | --------
-**ip** |  required  | IP address to whitelist | string |  `ip` 
+**ip** |  required  | IP address to unblock | string |  `ip` 
 **role** |  optional  | ARN of Role to run action as | string |  `aws bah role arn` 
 
 #### Action Output
